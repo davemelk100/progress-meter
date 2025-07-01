@@ -112,7 +112,7 @@ function App() {
             </div>
 
             {/* Full-width Progress Meter */}
-            <div className="w-full bg-gray-100 rounded-lg p-4">
+            <div className="w-full rounded-lg p-4">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-medium text-gray-700">
                   Optimization Level
@@ -148,7 +148,7 @@ function App() {
               </div>
 
               {/* Section Labels for First Bar */}
-              <div className="flex justify-between mt-2 text-xs text-gray-600 mb-8">
+              <div className="flex justify-between mt-2 text-xs text-gray-600 mb-[50px]">
                 <div className="text-center">
                   <div
                     className="w-2 h-2 rounded-full mx-auto mb-1"
@@ -204,7 +204,7 @@ function App() {
               </div>
 
               {/* Section Labels for Second Bar */}
-              <div className="flex justify-between mt-2 text-xs text-gray-600 mb-8">
+              <div className="flex justify-between mt-2 text-xs text-gray-600 mb-[50px]">
                 <div className="text-center">
                   <div
                     className="w-2 h-2 rounded-full mx-auto mb-1"
@@ -232,7 +232,16 @@ function App() {
               </div>
 
               {/* Third Progress Bar - Circular Segments Approach */}
-              <div className="relative w-full h-16 bg-white rounded-lg shadow-inner p-2">
+              <div className="relative w-full h-16 bg-white rounded-lg p-2">
+                {/* 49% Notch Marker */}
+                <div
+                  className="absolute w-1 h-3 bg-black shadow-lg"
+                  style={{
+                    left: "30%",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                  }}
+                ></div>
                 {/* Big circles with connecting small circles */}
                 <div className="flex items-center justify-between h-full">
                   {/* Less Section - Big circle */}
@@ -250,11 +259,10 @@ function App() {
                         }}
                       ></div>
                     </div>
-                    <div className="text-xs text-center mt-1">Less</div>
                   </div>
 
                   {/* Connecting small circles */}
-                  <div className="flex items-center space-x-1 flex-1 justify-center">
+                  <div className="flex items-center space-x-1 flex-1 justify-center relative">
                     <div
                       className="w-full h-3 rounded-full"
                       style={{
@@ -263,6 +271,27 @@ function App() {
                           : "linear-gradient(to right, #6B7280 0%, #6B7280 60%, #374151 70%, #374151 100%)",
                       }}
                     ></div>
+
+                    {/* 49% label positioned at 30% */}
+                    <div
+                      className="absolute top-full mt-2"
+                      style={{
+                        marginLeft: "30%",
+                        transform: "translateX(-50%)",
+                      }}
+                    >
+                      <div
+                        className="w-16 h-16 rounded-full flex items-center justify-center"
+                        style={{ backgroundColor: "#FEF2F2" }}
+                      >
+                        <span
+                          className="text-2xl font-bold"
+                          style={{ color: "#DB352F" }}
+                        >
+                          49%
+                        </span>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Somewhat Section - Big circle */}
@@ -280,7 +309,6 @@ function App() {
                         }}
                       ></div>
                     </div>
-                    <div className="text-xs text-center mt-1">Somewhat</div>
                   </div>
 
                   {/* Connecting small circles */}
@@ -310,7 +338,6 @@ function App() {
                         }}
                       ></div>
                     </div>
-                    <div className="text-xs text-center mt-1">Well</div>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { TrendingUp, Info, ChevronDown } from "lucide-react";
+import { TrendingUp, BookOpen, ChevronDown } from "lucide-react";
 
 interface OptimizationCard {
   title: string;
@@ -45,6 +45,9 @@ const optimizationCards: OptimizationCard[] = [
 function App() {
   const percentage = 49; // Current optimization percentage
   const [isColorMode, setIsColorMode] = React.useState(true);
+  const [selectedCard, setSelectedCard] =
+    React.useState<OptimizationCard | null>(null);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -72,8 +75,70 @@ function App() {
     }
   };
 
+  const openModal = (card: OptimizationCard) => {
+    setSelectedCard(card);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedCard(null);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 p-6">
+      {/* Modal */}
+      {isModalOpen && selectedCard && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 max-w-2xl mx-4 max-h-[80vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-black">
+                {selectedCard.title}
+              </h2>
+              <button
+                onClick={closeModal}
+                className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
+              >
+                ×
+              </button>
+            </div>
+            <div className="mb-6">
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                {selectedCard.description}
+              </p>
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h3 className="font-semibold text-gray-800 mb-2">
+                  Why you have this score:
+                </h3>
+                <p className="text-gray-600">
+                  {selectedCard.status === "good" &&
+                    "Your energy usage patterns show excellent optimization in this area. You're consistently making efficient choices that minimize waste and maximize savings."}
+                  {selectedCard.status === "warning" &&
+                    "There's room for improvement in this area. While you're doing some things right, small adjustments could significantly boost your optimization score."}
+                  {selectedCard.status === "poor" &&
+                    "This area needs attention. Your current usage patterns indicate opportunities for substantial improvements that could lead to significant energy savings."}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <div
+                className={`text-4xl font-bold ${getStatusColor(
+                  selectedCard.status
+                )}`}
+              >
+                {selectedCard.percentage}%
+              </div>
+              <button
+                onClick={closeModal}
+                className="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-gray-700 font-medium transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Color/Greyscale Toggle - Top Right of Viewport */}
       <button
         onClick={() => setIsColorMode(!isColorMode)}
@@ -96,8 +161,8 @@ function App() {
             </div>
             <div className="flex items-center gap-4">
               <div className="text-6xl font-bold text-black">49%</div>
-              <div className="w-6 h-6 rounded-full border-2 border-black flex items-center justify-center">
-                <Info className="w-4 h-4 text-black" />
+              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-md">
+                <BookOpen className="w-5 h-5 text-black" />
               </div>
             </div>
           </div>
@@ -262,30 +327,43 @@ function App() {
                   </div>
 
                   {/* Connecting small circles */}
-                  <div className="flex items-center space-x-1 flex-1 justify-center relative">
-                    <div
-                      className="w-full h-3 rounded-full"
-                      style={{
-                        background: isColorMode
-                          ? "linear-gradient(to right, #DB352F 0%, #DB352F 60%, #2E62E1 70%, #2E62E1 100%)"
-                          : "linear-gradient(to right, #6B7280 0%, #6B7280 60%, #374151 70%, #374151 100%)",
-                      }}
-                    ></div>
+                  <div className="flex items-center space-x-1 flex-1 justify-center relative px-[5px]">
+                    <div className="w-full h-3 flex">
+                      <div
+                        className="h-full"
+                        style={{
+                          width: "60%",
+                          backgroundColor: isColorMode ? "#DB352F" : "#6B7280",
+                        }}
+                      ></div>
+                      <div
+                        className="h-full"
+                        style={{
+                          width: "40%",
+                          backgroundColor: isColorMode ? "#2E62E1" : "#374151",
+                        }}
+                      ></div>
+                    </div>
 
                     {/* 49% label positioned at 30% */}
                     <div
-                      className="absolute top-full mt-2"
+                      className="absolute"
                       style={{
                         marginLeft: "30%",
-                        transform: "translateX(-50%)",
+                        top: "50%",
+                        transform: "translateX(-50%) translateY(-50%)",
                       }}
                     >
                       <div
-                        className="w-16 h-16 rounded-full flex items-center justify-center"
-                        style={{ backgroundColor: "#FEF2F2" }}
+                        className="w-20 h-20 rounded-full flex items-center justify-center border"
+                        style={{
+                          backgroundColor: "#FEF2F2",
+                          borderWidth: "1px",
+                          borderColor: "#DB352F",
+                        }}
                       >
                         <span
-                          className="text-2xl font-bold"
+                          className="text-3xl font-bold"
                           style={{ color: "#DB352F" }}
                         >
                           49%
@@ -312,15 +390,23 @@ function App() {
                   </div>
 
                   {/* Connecting small circles */}
-                  <div className="flex items-center space-x-1 flex-1 justify-center">
-                    <div
-                      className="w-full h-3 rounded-full"
-                      style={{
-                        background: isColorMode
-                          ? "linear-gradient(to right, #2E62E1 0%, #2E62E1 60%, #0BA34F 70%, #0BA34F 100%)"
-                          : "linear-gradient(to right, #374151 0%, #374151 60%, #111827 70%, #111827 100%)",
-                      }}
-                    ></div>
+                  <div className="flex items-center space-x-1 flex-1 justify-center px-[5px]">
+                    <div className="w-full h-3 flex">
+                      <div
+                        className="h-full"
+                        style={{
+                          width: "33.33%",
+                          backgroundColor: isColorMode ? "#2E62E1" : "#374151",
+                        }}
+                      ></div>
+                      <div
+                        className="h-full"
+                        style={{
+                          width: "66.67%",
+                          backgroundColor: isColorMode ? "#0BA34F" : "#111827",
+                        }}
+                      ></div>
+                    </div>
                   </div>
 
                   {/* Well Section - Big circle */}
@@ -354,13 +440,14 @@ function App() {
             >
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold text-black">{card.title}</h2>
-                <div
-                  className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${getInfoIconColor(
+                <button
+                  onClick={() => openModal(card)}
+                  className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-shadow cursor-pointer ${getInfoIconColor(
                     card.status
                   )}`}
                 >
-                  <Info className="w-4 h-4" />
-                </div>
+                  <BookOpen className="w-5 h-5" />
+                </button>
               </div>
 
               <div className="mb-6">

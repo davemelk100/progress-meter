@@ -312,22 +312,24 @@ function App() {
                   {/* Less Section - Big circle */}
                   <div className="relative">
                     <div
-                      className="w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center"
+                      className="w-12 h-12 rounded-full border-2 border-gray-200 flex items-center justify-center"
                       style={{
                         borderColor: isColorMode ? "#DB352F" : "#6B7280",
                       }}
                     >
                       <div
-                        className="w-8 h-8 rounded-full"
+                        className="w-8 h-8 rounded-full border"
                         style={{
-                          backgroundColor: isColorMode ? "#DB352F" : "#6B7280",
+                          backgroundColor: isColorMode ? "#FEF2F2" : "#6B7280",
+                          borderWidth: "0.5px",
+                          borderColor: isColorMode ? "#DB352F" : "#6B7280",
                         }}
                       ></div>
                     </div>
                   </div>
 
                   {/* Connecting small circles */}
-                  <div className="flex items-center space-x-1 flex-1 justify-center relative px-[5px]">
+                  <div className="flex items-center space-x-1 flex-1 justify-center relative">
                     <div className="w-full h-3 flex">
                       <div
                         className="h-full"
@@ -375,22 +377,24 @@ function App() {
                   {/* Somewhat Section - Big circle */}
                   <div className="relative">
                     <div
-                      className="w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center"
+                      className="w-12 h-12 rounded-full border-2 border-gray-200 flex items-center justify-center"
                       style={{
                         borderColor: isColorMode ? "#2E62E1" : "#374151",
                       }}
                     >
                       <div
-                        className="w-8 h-8 rounded-full"
+                        className="w-8 h-8 rounded-full border"
                         style={{
-                          backgroundColor: isColorMode ? "#2E62E1" : "#374151",
+                          backgroundColor: isColorMode ? "#F0F6FF" : "#374151",
+                          borderWidth: "0.5px",
+                          borderColor: isColorMode ? "#2E62E1" : "#374151",
                         }}
                       ></div>
                     </div>
                   </div>
 
                   {/* Connecting small circles */}
-                  <div className="flex items-center space-x-1 flex-1 justify-center px-[5px]">
+                  <div className="flex items-center space-x-1 flex-1 justify-center">
                     <div className="w-full h-3 flex">
                       <div
                         className="h-full"
@@ -412,19 +416,220 @@ function App() {
                   {/* Well Section - Big circle */}
                   <div className="relative">
                     <div
-                      className="w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center"
+                      className="w-12 h-12 rounded-full border-2 border-gray-200 flex items-center justify-center"
                       style={{
                         borderColor: isColorMode ? "#0BA34F" : "#111827",
                       }}
                     >
                       <div
-                        className="w-8 h-8 rounded-full"
+                        className="w-8 h-8 rounded-full border"
                         style={{
+                          backgroundColor: isColorMode ? "#F0FDF4" : "#111827",
+                          borderWidth: "0.5px",
+                          borderColor: isColorMode ? "#0BA34F" : "#111827",
+                        }}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Section Labels for Circle Meter */}
+              <div className="flex justify-between mt-2 text-xs text-gray-600 mb-[50px]">
+                <div className="text-center">
+                  <div
+                    className="w-2 h-2 rounded-full mx-auto mb-1"
+                    style={{ backgroundColor: "#DB352F" }}
+                  ></div>
+                  <span>Less</span>
+                  <div className="text-gray-400">0-60%</div>
+                </div>
+                <div className="text-center">
+                  <div
+                    className="w-2 h-2 rounded-full mx-auto mb-1"
+                    style={{ backgroundColor: "#2E62E1" }}
+                  ></div>
+                  <span>Somewhat</span>
+                  <div className="text-gray-400">61-80%</div>
+                </div>
+                <div className="text-center">
+                  <div
+                    className="w-2 h-2 rounded-full mx-auto mb-1"
+                    style={{ backgroundColor: "#0BA34F" }}
+                  ></div>
+                  <span>Well</span>
+                  <div className="text-gray-400">81-100%</div>
+                </div>
+              </div>
+
+              {/* Fourth Progress Bar - Rectangle Segments Approach */}
+              <div className="relative w-full h-20 bg-white rounded-lg p-2">
+                {/* 49% Notch Marker */}
+                <div
+                  className="absolute w-1 h-4 bg-black shadow-lg"
+                  style={{
+                    left: "30%",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                  }}
+                ></div>
+                {/* Big rectangles with connecting bars */}
+                <div className="flex items-center justify-between h-full">
+                  {/* Less Section - Big rectangle */}
+                  <div className="relative">
+                    <div
+                      className="w-28 h-12 rounded flex flex-col items-center justify-center"
+                      style={{
+                        backgroundColor: isColorMode ? "#fdf3f2" : "white",
+                      }}
+                    >
+                      <span className="text-sm font-medium text-gray-700">
+                        Less
+                      </span>
+                      <span className="text-sm text-gray-400">0-60%</span>
+                    </div>
+                  </div>
+
+                  {/* Connecting bars */}
+                  <div className="flex items-center space-x-1 flex-1 justify-center relative">
+                    <div className="w-full h-4 flex">
+                      <div
+                        className="h-full"
+                        style={{
+                          width: "60%",
+                          backgroundColor: isColorMode ? "#DB352F" : "#6B7280",
+                        }}
+                      ></div>
+                      <div
+                        className="h-full"
+                        style={{
+                          width: "40%",
+                          backgroundColor: isColorMode ? "#2E62E1" : "#374151",
+                        }}
+                      ></div>
+                    </div>
+
+                    {/* 49% label positioned at 30% */}
+                    <div
+                      className="absolute"
+                      style={{
+                        marginLeft: "30%",
+                        top: "50%",
+                        transform: "translateX(-50%) translateY(-50%)",
+                      }}
+                    >
+                      <div className="w-20 h-12 rounded flex items-center justify-center">
+                        <div
+                          className="w-full h-full rounded flex items-center justify-center"
+                          style={{
+                            backgroundColor: "rgba(255, 255, 255, 1)",
+                            padding: "0 10px",
+                          }}
+                        >
+                          <span
+                            className="text-3xl font-bold"
+                            style={{ color: "#dd342d" }}
+                          >
+                            49%
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Somewhat Section - Big rectangle */}
+                  <div className="relative">
+                    <div
+                      className="w-28 h-12 rounded flex flex-col items-center justify-center"
+                      style={{
+                        backgroundColor: isColorMode ? "#f0f7ff" : "white",
+                      }}
+                    >
+                      <span className="text-sm font-medium text-gray-700">
+                        Somewhat
+                      </span>
+                      <span className="text-sm text-gray-400">61-80%</span>
+                    </div>
+                  </div>
+
+                  {/* Connecting bars */}
+                  <div className="flex items-center space-x-1 flex-1 justify-center">
+                    <div className="w-full h-4 flex">
+                      <div
+                        className="h-full"
+                        style={{
+                          width: "33.33%",
+                          backgroundColor: isColorMode ? "#2E62E1" : "#374151",
+                        }}
+                      ></div>
+                      <div
+                        className="h-full"
+                        style={{
+                          width: "66.67%",
                           backgroundColor: isColorMode ? "#0BA34F" : "#111827",
                         }}
                       ></div>
                     </div>
                   </div>
+
+                  {/* Well Section - Big rectangle */}
+                  <div className="relative">
+                    <div
+                      className="w-28 h-12 rounded flex flex-col items-center justify-center"
+                      style={{
+                        backgroundColor: isColorMode ? "#f1fcf4" : "white",
+                      }}
+                    >
+                      <span className="text-sm font-medium text-gray-700">
+                        Well
+                      </span>
+                      <span className="text-sm text-gray-400">81-100%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Fifth Progress Meter - Card Style with Scale */}
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mt-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-gray-800">
+                    Energy Optimization Score
+                  </h3>
+                  <div className="text-2xl font-bold text-red-600">49%</div>
+                </div>
+
+                {/* Scale Bar */}
+                <div className="relative mb-4">
+                  <div className="w-full h-8 bg-gray-100 rounded-full overflow-hidden">
+                    {/* Progress Fill */}
+                    <div
+                      className="h-full bg-gradient-to-r from-red-300 to-red-600 rounded-full transition-all duration-500"
+                      style={{ width: "49%" }}
+                    ></div>
+                  </div>
+
+                  {/* Level Indicators */}
+                  <div className="flex justify-between mt-1">
+                    <div className="text-center">
+                      <div className="w-3 h-3 bg-red-500 rounded-full mx-auto mb-1"></div>
+                      <span className="text-xs text-gray-500">Poor</span>
+                    </div>
+                    <div className="text-center">
+                      <div className="w-3 h-3 bg-yellow-500 rounded-full mx-auto mb-1"></div>
+                      <span className="text-xs text-gray-500">Fair</span>
+                    </div>
+                    <div className="text-center">
+                      <div className="w-3 h-3 bg-green-500 rounded-full mx-auto mb-1"></div>
+                      <span className="text-xs text-gray-500">Good</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Status Description */}
+                <div className="text-sm text-gray-600">
+                  <span className="font-medium">Current Status:</span> Below
+                  average optimization. Consider implementing energy-saving
+                  measures to improve efficiency.
                 </div>
               </div>
             </div>

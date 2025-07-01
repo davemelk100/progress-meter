@@ -8,149 +8,6 @@ interface OptimizationCard {
   status: "good" | "warning" | "poor";
 }
 
-// Progress Meter Component
-interface ProgressMeterProps {
-  percentage: number;
-}
-
-const ProgressMeter: React.FC<ProgressMeterProps> = ({ percentage }) => {
-  // Debug logging
-  console.log("ProgressMeter percentage:", percentage);
-  console.log("Calculated left position:", `${percentage}%`);
-
-  const getOptimizationLevel = (score: number) => {
-    if (score <= 60)
-      return {
-        level: "Less",
-        color: "from-red-400 to-red-600",
-        textColor: "text-red-600",
-        bgColor: "bg-red-50",
-        borderColor: "border-red-200",
-        glowColor: "shadow-red-200",
-      };
-    if (score <= 80)
-      return {
-        level: "Somewhat",
-        color: "from-yellow-400 to-yellow-600",
-        textColor: "text-yellow-600",
-        bgColor: "bg-yellow-50",
-        borderColor: "border-yellow-200",
-        glowColor: "shadow-yellow-200",
-      };
-    return {
-      level: "Well",
-      color: "from-green-400 to-green-600",
-      textColor: "text-green-600",
-      bgColor: "bg-green-50",
-      borderColor: "border-green-200",
-      glowColor: "shadow-green-200",
-    };
-  };
-
-  const { level, color, textColor, bgColor, borderColor, glowColor } =
-    getOptimizationLevel(percentage);
-
-  return (
-    <div
-      className={`${bgColor} border ${borderColor} rounded-xl p-6 shadow-sm animate-slide-up`}
-    >
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <div
-            className={`w-3 h-3 rounded-full bg-gradient-to-r ${color} shadow-sm animate-pulse-glow`}
-          ></div>
-          <span className="text-lg font-semibold text-gray-800">
-            Optimization Level
-          </span>
-        </div>
-        <div
-          className={`px-4 py-2 rounded-full ${textColor} bg-white border-2 font-bold text-sm shadow-sm animate-bounce-in`}
-        >
-          {level}
-        </div>
-      </div>
-
-      {/* Debug info */}
-      <div className="text-xs text-gray-500 mb-2">
-        Debug: Percentage = {percentage}%, Position = {percentage}%
-      </div>
-
-      <div className="relative">
-        {/* Background track */}
-        <div className="w-full progress-track rounded-full h-4 shadow-inner relative">
-          {/* Progress fill with gradient */}
-          <div
-            className={`h-4 rounded-full bg-gradient-to-r ${color} shadow-lg transition-all duration-1000 ease-out relative overflow-hidden progress-fill ${glowColor}`}
-            style={{ width: `${Math.min(percentage, 100)}%` }}
-          >
-            {/* Enhanced shimmer effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
-          </div>
-
-          {/* Percentage indicator positioned relative to the progress bar */}
-          <div
-            className="absolute -top-8 transition-all duration-1000 ease-out progress-indicator z-10"
-            style={{
-              left: `${Math.min(percentage, 100)}%`,
-              transform: "translateX(-50%)",
-            }}
-          >
-            <div className="bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-lg animate-bounce-in whitespace-nowrap">
-              {percentage}%
-            </div>
-            <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800 mx-auto"></div>
-          </div>
-
-          {/* Position marker line */}
-          <div
-            className="absolute top-0 w-0.5 h-4 bg-red-500 opacity-60 transition-all duration-1000 ease-out z-5"
-            style={{
-              left: `${Math.min(percentage, 100)}%`,
-              transform: "translateX(-50%)",
-            }}
-          ></div>
-        </div>
-      </div>
-
-      {/* Scale markers */}
-      <div className="flex justify-between text-xs text-gray-500 mt-3 px-1">
-        <div className="flex flex-col items-center">
-          <div className="w-1 h-2 bg-gray-300 rounded-full mb-1"></div>
-          <span>0%</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="w-1 h-2 bg-gray-300 rounded-full mb-1"></div>
-          <span>60%</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="w-1 h-2 bg-gray-300 rounded-full mb-1"></div>
-          <span>80%</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="w-1 h-2 bg-gray-300 rounded-full mb-1"></div>
-          <span>100%</span>
-        </div>
-      </div>
-
-      {/* Level descriptions */}
-      <div className="grid grid-cols-3 gap-4 mt-4 text-xs">
-        <div className="text-center">
-          <div className="w-2 h-2 bg-red-500 rounded-full mx-auto mb-1 animate-pulse"></div>
-          <span className="text-gray-600">Less</span>
-        </div>
-        <div className="text-center">
-          <div className="w-2 h-2 bg-yellow-500 rounded-full mx-auto mb-1 animate-pulse"></div>
-          <span className="text-gray-600">Somewhat</span>
-        </div>
-        <div className="text-center">
-          <div className="w-2 h-2 bg-green-500 rounded-full mx-auto mb-1 animate-pulse"></div>
-          <span className="text-gray-600">Well</span>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const optimizationCards: OptimizationCard[] = [
   {
     title: "Peak vs Off-Peak usage",
@@ -186,6 +43,8 @@ const optimizationCards: OptimizationCard[] = [
 ];
 
 function App() {
+  const percentage = 49; // Current optimization percentage
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case "good":
@@ -240,8 +99,52 @@ function App() {
               control. These 5 categories offer the biggest impact on your bill:
             </p>
 
-            {/* Progress Meter */}
-            <ProgressMeter percentage={49} />
+            {/* Full-width Progress Meter */}
+            <div className="w-full bg-gray-100 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-medium text-gray-700">
+                  Optimization Level
+                </span>
+                <span className="text-sm font-semibold text-red-600">Less</span>
+              </div>
+
+              {/* Progress Bar with Three Sections */}
+              <div className="relative w-full h-6 bg-white rounded-full shadow-inner overflow-hidden">
+                {/* Section 1: Less (0-60%) */}
+                <div className="absolute left-0 top-0 w-1/3 h-full bg-red-500"></div>
+
+                {/* Section 2: Somewhat (61-80%) */}
+                <div className="absolute left-1/3 top-0 w-1/3 h-full bg-yellow-500"></div>
+
+                {/* Section 3: Well (81-100%) */}
+                <div className="absolute left-2/3 top-0 w-1/3 h-full bg-green-500"></div>
+
+                {/* Current Position Indicator */}
+                <div
+                  className="absolute top-0 w-1 h-full bg-black shadow-lg transition-all duration-1000 ease-out"
+                  style={{ left: `${Math.min(percentage, 100)}%` }}
+                ></div>
+              </div>
+
+              {/* Section Labels */}
+              <div className="flex justify-between mt-2 text-xs text-gray-600">
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-red-500 rounded-full mx-auto mb-1"></div>
+                  <span>Less</span>
+                  <div className="text-gray-400">0-60%</div>
+                </div>
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full mx-auto mb-1"></div>
+                  <span>Somewhat</span>
+                  <div className="text-gray-400">61-80%</div>
+                </div>
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mx-auto mb-1"></div>
+                  <span>Well</span>
+                  <div className="text-gray-400">81-100%</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

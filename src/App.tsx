@@ -93,7 +93,7 @@ function App() {
             </div>
           </div>
 
-          <div className="mt-6 max-w-3xl">
+          <div className="mt-6">
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
               See how well you're optimizing energy use in areas you can
               control. These 5 categories offer the biggest impact on your bill:
@@ -105,41 +105,58 @@ function App() {
                 <span className="text-sm font-medium text-gray-700">
                   Optimization Level
                 </span>
-                <span className="text-sm font-semibold text-red-600">Less</span>
               </div>
 
-              {/* Progress Bar with Three Sections */}
-              <div className="relative w-full h-6 bg-white rounded-full shadow-inner overflow-hidden">
-                {/* Section 1: Less (0-60%) */}
-                <div className="absolute left-0 top-0 w-1/3 h-full bg-red-500"></div>
-
-                {/* Section 2: Somewhat (61-80%) */}
-                <div className="absolute left-1/3 top-0 w-1/3 h-full bg-yellow-500"></div>
-
-                {/* Section 3: Well (81-100%) */}
-                <div className="absolute left-2/3 top-0 w-1/3 h-full bg-green-500"></div>
-
-                {/* Current Position Indicator */}
+              {/* Progress Bar with Progressive Darkening */}
+              <div className="relative w-full h-6 bg-white rounded-full shadow-inner">
+                {/* Progressive darkening line from left to right */}
                 <div
-                  className="absolute top-0 w-1 h-full bg-black shadow-lg transition-all duration-1000 ease-out"
-                  style={{ left: `${Math.min(percentage, 100)}%` }}
+                  className="absolute left-0 top-0 h-full rounded-full"
+                  style={{
+                    width: "100%",
+                    background:
+                      "linear-gradient(to right, #DB352F, #2E62E1, #0BA34F)",
+                  }}
                 ></div>
+
+                {/* 49% Notch Marker */}
+                <div
+                  className="absolute top-0 w-1 h-full bg-black shadow-lg"
+                  style={{ left: "30%" }}
+                ></div>
+              </div>
+
+              {/* Percentage Label under Notch */}
+              <div
+                className="relative mt-1 text-center"
+                style={{ marginLeft: "30%", transform: "translateX(-50%)" }}
+              >
+                <span className="text-xs font-medium text-gray-700">49%</span>
               </div>
 
               {/* Section Labels */}
               <div className="flex justify-between mt-2 text-xs text-gray-600">
                 <div className="text-center">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mx-auto mb-1"></div>
+                  <div
+                    className="w-2 h-2 rounded-full mx-auto mb-1"
+                    style={{ backgroundColor: "#DB352F" }}
+                  ></div>
                   <span>Less</span>
                   <div className="text-gray-400">0-60%</div>
                 </div>
                 <div className="text-center">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full mx-auto mb-1"></div>
+                  <div
+                    className="w-2 h-2 rounded-full mx-auto mb-1"
+                    style={{ backgroundColor: "#2E62E1" }}
+                  ></div>
                   <span>Somewhat</span>
                   <div className="text-gray-400">61-80%</div>
                 </div>
                 <div className="text-center">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mx-auto mb-1"></div>
+                  <div
+                    className="w-2 h-2 rounded-full mx-auto mb-1"
+                    style={{ backgroundColor: "#0BA34F" }}
+                  ></div>
                   <span>Well</span>
                   <div className="text-gray-400">81-100%</div>
                 </div>

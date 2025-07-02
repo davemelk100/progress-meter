@@ -86,7 +86,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen p-6">
       {/* Modal */}
       {isModalOpen && selectedCard && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -149,7 +149,7 @@ function App() {
 
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-6">
+        <div className="bg-white rounded-lg p-8 mb-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="p-2">
@@ -357,7 +357,7 @@ function App() {
                       }}
                     >
                       <div
-                        className="w-20 h-20 rounded-full flex items-center justify-center border"
+                        className="w-24 h-24 rounded-full bg-white flex items-center justify-center border-2 border-dashed shadow-md"
                         style={{
                           backgroundColor: "#FEF2F2",
                           borderWidth: "1px",
@@ -365,7 +365,7 @@ function App() {
                         }}
                       >
                         <span
-                          className="text-3xl font-bold"
+                          className="text-3xl font-semibold"
                           style={{ color: "#DB352F" }}
                         >
                           49%
@@ -595,42 +595,235 @@ function App() {
                   <h3 className="text-lg font-semibold text-gray-800">
                     Energy Optimization Score
                   </h3>
-                  <div className="text-2xl font-bold text-red-600">49%</div>
                 </div>
 
                 {/* Scale Bar */}
                 <div className="relative mb-4">
-                  <div className="w-full h-8 bg-gray-100 rounded-full overflow-hidden">
-                    {/* Progress Fill */}
+                  <div
+                    className="w-full h-8 bg-gray-100 rounded-full overflow-hidden flex"
+                    style={{ borderRadius: "9999px" }}
+                  >
+                    {/* Poor Segment */}
                     <div
-                      className="h-full bg-gradient-to-r from-red-300 to-red-600 rounded-full transition-all duration-500"
-                      style={{ width: "49%" }}
+                      className="h-full"
+                      style={{
+                        width: "33.33%",
+                        backgroundColor: isColorMode ? "#DB352F" : "#6B7280",
+                      }}
                     ></div>
+                    {/* Fair Segment */}
+                    <div
+                      className="h-full"
+                      style={{
+                        width: "33.33%",
+                        backgroundColor: isColorMode ? "#2E62E1" : "#374151",
+                        borderLeft: "2px solid rgba(0, 0, 0, 0.3)",
+                        borderRight: "2px solid rgba(0, 0, 0, 0.3)",
+                      }}
+                    ></div>
+                    {/* Good Segment */}
+                    <div
+                      className="h-full"
+                      style={{
+                        width: "33.33%",
+                        backgroundColor: isColorMode ? "#0BA34F" : "#111827",
+                        borderTopRightRadius: "9999px",
+                        borderBottomRightRadius: "9999px",
+                        borderLeft: "2px solid rgba(0, 0, 0, 0.3)",
+                      }}
+                    ></div>
+                  </div>
+
+                  {/* Progress Fill Overlay */}
+                  <div
+                    className="absolute top-0 left-0 h-8 bg-gradient-to-r from-red-300 to-red-600 transition-all duration-500"
+                    style={{ width: "33.33%", borderRadius: "9999px" }}
+                  ></div>
+
+                  {/* Unfilled portion overlay */}
+                  <div
+                    className="absolute top-0 h-8 bg-gray-200 transition-all duration-500"
+                    style={{
+                      left: "33.33%",
+                      right: "0",
+                      borderTopRightRadius: "9999px",
+                      borderBottomRightRadius: "9999px",
+                    }}
+                  ></div>
+
+                  {/* White Notch in center of red section */}
+                  <div
+                    className="absolute w-1 bg-white"
+                    style={{
+                      left: "calc(16.67% + 40px)",
+                      top: "0",
+                      bottom: "0",
+                    }}
+                  ></div>
+
+                  {/* 49% label below notch */}
+                  <div
+                    className="absolute text-2xl font-bold"
+                    style={{
+                      left: "calc(16.67% + 40px)",
+                      top: "100%",
+                      transform: "translateX(-50%)",
+                      marginTop: "-30px",
+                      color: "#DB352F",
+                    }}
+                  >
+                    49%
                   </div>
 
                   {/* Level Indicators */}
                   <div className="flex justify-between mt-1">
                     <div className="text-center">
-                      <div className="w-3 h-3 bg-red-500 rounded-full mx-auto mb-1"></div>
-                      <span className="text-xs text-gray-500">Poor</span>
+                      <div
+                        className="w-3 h-3 rounded-full mx-auto mb-1"
+                        style={{
+                          backgroundColor: isColorMode ? "#DB352F" : "#6B7280",
+                        }}
+                      ></div>
+                      <span className="text-xs text-gray-500">Less</span>
+                      <div className="text-xs text-gray-400 mt-1">0-60%</div>
                     </div>
                     <div className="text-center">
-                      <div className="w-3 h-3 bg-yellow-500 rounded-full mx-auto mb-1"></div>
-                      <span className="text-xs text-gray-500">Fair</span>
+                      <div
+                        className="w-3 h-3 rounded-full mx-auto mb-1"
+                        style={{
+                          backgroundColor: isColorMode ? "#2E62E1" : "#374151",
+                        }}
+                      ></div>
+                      <span className="text-xs text-gray-500">Somewhat</span>
+                      <div className="text-xs text-gray-400 mt-1">61-80%</div>
                     </div>
                     <div className="text-center">
-                      <div className="w-3 h-3 bg-green-500 rounded-full mx-auto mb-1"></div>
-                      <span className="text-xs text-gray-500">Good</span>
+                      <div
+                        className="w-3 h-3 rounded-full mx-auto mb-1"
+                        style={{
+                          backgroundColor: isColorMode ? "#0BA34F" : "#111827",
+                        }}
+                      ></div>
+                      <span className="text-xs text-gray-500">Well</span>
+                      <div className="text-xs text-gray-400 mt-1">81-100%</div>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                {/* Status Description */}
-                <div className="text-sm text-gray-600">
-                  <span className="font-medium">Current Status:</span> Below
-                  average optimization. Consider implementing energy-saving
-                  measures to improve efficiency.
+        {/* Tenth Progress Meter - Based on Provided Image */}
+        <div className="mt-[50px] mb-[50px]">
+          <div className="relative w-full flex flex-col items-center">
+            {/* Meter Bar */}
+            <div
+              className="relative w-full max-w-4xl flex items-center justify-between"
+              style={{ height: 60 }}
+            >
+              {/* Segments */}
+              <div className="flex w-full h-full">
+                {/* Less Optimized */}
+                <div className="flex-1 h-full relative z-0">
+                  <div
+                    className="absolute inset-0 rounded-l-full rounded-r-none border-2 border-dashed"
+                    style={{ borderColor: "#DB352F", borderRight: "none" }}
+                  ></div>
+                  {/* Fill up to 49% */}
+                  <div
+                    className="absolute"
+                    style={{
+                      left: 5,
+                      top: 5,
+                      height: "calc(100% - 10px)",
+                      width: "calc(49% - 5px)",
+                      background:
+                        "linear-gradient(270deg, #DB352F 0%, #F7B2A3 100%)",
+                      borderTopLeftRadius: "9999px",
+                      borderBottomLeftRadius: "9999px",
+                      borderTopRightRadius: 0,
+                      borderBottomRightRadius: 0,
+                      zIndex: 1,
+                    }}
+                  ></div>
                 </div>
+                {/* Somewhat Optimized */}
+                <div className="flex-1 h-full relative z-0">
+                  <div
+                    className="absolute inset-0 border-t-2 border-b-2 border-dashed"
+                    style={{
+                      borderColor: "#2E62E1",
+                      borderLeft: "none",
+                      borderRight: "none",
+                      borderRadius: 0,
+                    }}
+                  ></div>
+                </div>
+                {/* Well Optimized */}
+                <div className="flex-1 h-full relative z-0">
+                  <div
+                    className="absolute inset-0 rounded-r-full rounded-l-none border-2 border-dashed"
+                    style={{ borderColor: "#0BA34F", borderLeft: "none" }}
+                  ></div>
+                </div>
+              </div>
+              {/* 49% Circle Overlay */}
+              <div
+                className="absolute z-10"
+                style={{
+                  left: "16.67%",
+                  top: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                <div
+                  className="w-24 h-24 rounded-full bg-white flex items-center justify-center border-2 border-dashed shadow-md"
+                  style={{ borderColor: "#DB352F" }}
+                >
+                  <span
+                    className="text-3xl font-semibold"
+                    style={{ color: "#DB352F" }}
+                  >
+                    49%
+                  </span>
+                </div>
+              </div>
+            </div>
+            {/* Labels and Ranges */}
+            <div className="flex w-full max-w-4xl justify-between mt-8">
+              <div className="flex-1 text-center">
+                <div
+                  className="font-medium text-gray-800"
+                  style={{ color: "#DB352F" }}
+                >
+                  Less
+                  <br />
+                  Optimized
+                </div>
+                <div className="text-gray-500 mt-1">0-60%</div>
+              </div>
+              <div className="flex-1 text-center">
+                <div
+                  className="font-medium text-gray-800"
+                  style={{ color: "#2E62E1" }}
+                >
+                  Somewhat
+                  <br />
+                  Optimized
+                </div>
+                <div className="text-gray-500 mt-1">61-80%</div>
+              </div>
+              <div className="flex-1 text-center">
+                <div
+                  className="font-medium text-gray-800"
+                  style={{ color: "#0BA34F" }}
+                >
+                  Well
+                  <br />
+                  Optimized
+                </div>
+                <div className="text-gray-500 mt-1">81-1000%</div>
               </div>
             </div>
           </div>

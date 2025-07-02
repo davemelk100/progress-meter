@@ -160,7 +160,7 @@ function App() {
               </h1>
             </div>
             <div className="flex items-center gap-4">
-              <div className="text-6xl font-bold text-black">49%</div>
+              <div className="text-6xl font-bold text-black">&lt;60%</div>
               <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-md">
                 <BookOpen className="w-5 h-5 text-black" />
               </div>
@@ -209,7 +209,9 @@ function App() {
                 className="relative mt-3 text-center"
                 style={{ marginLeft: "30%", transform: "translateX(-50%)" }}
               >
-                <span className="text-2xl font-bold text-gray-700">49%</span>
+                <span className="text-2xl font-bold text-gray-700">
+                  &lt;60%
+                </span>
               </div>
 
               {/* Section Labels for First Bar */}
@@ -265,7 +267,9 @@ function App() {
                 className="relative mt-3 text-center"
                 style={{ marginLeft: "30%", transform: "translateX(-50%)" }}
               >
-                <span className="text-2xl font-bold text-gray-700">49%</span>
+                <span className="text-2xl font-bold text-gray-700">
+                  &lt;60%
+                </span>
               </div>
 
               {/* Section Labels for Second Bar */}
@@ -367,9 +371,7 @@ function App() {
                         <span
                           className="text-3xl font-semibold"
                           style={{ color: "#DB352F" }}
-                        >
-                          49%
-                        </span>
+                        ></span>
                       </div>
                     </div>
                   </div>
@@ -530,7 +532,7 @@ function App() {
                             className="text-3xl font-bold"
                             style={{ color: "#dd342d" }}
                           >
-                            49%
+                            &lt;60%
                           </span>
                         </div>
                       </div>
@@ -661,7 +663,7 @@ function App() {
                     }}
                   ></div>
 
-                  {/* 49% label below notch */}
+                  {/* &lt;60% label below notch */}
                   <div
                     className="absolute text-2xl font-bold"
                     style={{
@@ -672,7 +674,7 @@ function App() {
                       color: "#DB352F",
                     }}
                   >
-                    49%
+                    &lt;60%
                   </div>
 
                   {/* Level Indicators */}
@@ -750,13 +752,14 @@ function App() {
                 </div>
                 {/* Somewhat Optimized */}
                 <div className="flex-1 h-full relative z-0">
+                  {/* Dashed border only, no blue gradient fill */}
                   <div
                     className="absolute inset-0 border-t-2 border-b-2 border-dashed"
                     style={{
                       borderColor: "#2E62E1",
                       borderLeft: "none",
-                      borderRight: "none",
                       borderRadius: 0,
+                      zIndex: 2,
                     }}
                   ></div>
                 </div>
@@ -785,7 +788,7 @@ function App() {
                     className="text-3xl font-semibold"
                     style={{ color: "#DB352F" }}
                   >
-                    49%
+                    &lt;60%
                   </span>
                 </div>
               </div>
@@ -829,6 +832,135 @@ function App() {
           </div>
         </div>
 
+        {/* Eleventh Progress Meter - Blue Section Highlight */}
+        <div className="mt-[50px] mb-[50px]">
+          <div className="relative w-full flex flex-col items-center">
+            {/* Meter Bar */}
+            <div
+              className="relative w-full max-w-4xl flex items-center justify-between"
+              style={{ height: 60 }}
+            >
+              {/* Segments */}
+              <div className="flex w-full h-full">
+                {/* Less Optimized */}
+                <div className="flex-1 h-full relative z-0">
+                  <div
+                    className="absolute inset-0 rounded-l-full rounded-r-none border-2 border-dashed"
+                    style={{ borderColor: "#DB352F", borderRight: "none" }}
+                  ></div>
+                  {/* Fill up to end of red section */}
+                  <div
+                    className="absolute"
+                    style={{
+                      left: 5,
+                      top: 5,
+                      height: "calc(100% - 10px)",
+                      width: "100%",
+                      background: "#DB352F",
+                      borderTopLeftRadius: "9999px",
+                      borderBottomLeftRadius: "9999px",
+                      borderTopRightRadius: 0,
+                      borderBottomRightRadius: 0,
+                      zIndex: 1,
+                    }}
+                  ></div>
+                </div>
+                {/* Somewhat Optimized */}
+                <div className="flex-1 h-full relative z-0">
+                  {/* Blue gradient fill (75% width, left-aligned) */}
+                  <div
+                    className="absolute"
+                    style={{
+                      left: 0,
+                      top: 5,
+                      height: "calc(100% - 10px)",
+                      width: "75%",
+                      background:
+                        "linear-gradient(90deg, #D6E0FB 0%, #2E62E1 100%)",
+                      borderRadius: 0,
+                      zIndex: 1,
+                    }}
+                  ></div>
+                  {/* Dashed border above gradient */}
+                  <div
+                    className="absolute inset-0 border-t-2 border-b-2 border-dashed"
+                    style={{
+                      borderColor: "#2E62E1",
+                      borderLeft: "none",
+                      borderRadius: 0,
+                      zIndex: 2,
+                    }}
+                  ></div>
+                </div>
+                {/* Well Optimized */}
+                <div className="flex-1 h-full relative z-0">
+                  <div
+                    className="absolute inset-0 rounded-r-full rounded-l-none border-2 border-dashed"
+                    style={{ borderColor: "#0BA34F", borderLeft: "none" }}
+                  ></div>
+                </div>
+              </div>
+              {/* &lt;80% Circle Overlay in Blue Section */}
+              <div
+                className="absolute z-10"
+                style={{
+                  left: "50%",
+                  top: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                <div
+                  className="w-24 h-24 rounded-full bg-white flex items-center justify-center border-2 border-dashed shadow-md"
+                  style={{ borderColor: "#2E62E1" }}
+                >
+                  <span
+                    className="text-2xl font-semibold"
+                    style={{ color: "#2E62E1" }}
+                  >
+                    &lt;80%
+                  </span>
+                </div>
+              </div>
+            </div>
+            {/* Labels and Ranges */}
+            <div className="flex w-full max-w-4xl justify-between mt-8">
+              <div className="flex-1 text-center">
+                <div
+                  className="font-medium text-gray-800"
+                  style={{ color: "#DB352F" }}
+                >
+                  Less
+                  <br />
+                  Optimized
+                </div>
+                <div className="text-gray-500 mt-1">0-60%</div>
+              </div>
+              <div className="flex-1 text-center">
+                <div
+                  className="font-medium text-gray-800"
+                  style={{ color: "#2E62E1" }}
+                >
+                  Somewhat
+                  <br />
+                  Optimized
+                </div>
+                <div className="text-gray-500 mt-1">61-80%</div>
+              </div>
+              <div className="flex-1 text-center">
+                <div
+                  className="font-medium text-gray-800"
+                  style={{ color: "#0BA34F" }}
+                >
+                  Well
+                  <br />
+                  Optimized
+                </div>
+                <div className="text-gray-500 mt-1">81-100%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {optimizationCards.map((card, index) => (
@@ -837,7 +969,7 @@ function App() {
               className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
             >
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold text-black">{card.title}</h2>
+                <h2 className="text-xl font-medium text-black">{card.title}</h2>
                 <button
                   onClick={() => openModal(card)}
                   className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-shadow cursor-pointer ${getInfoIconColor(
